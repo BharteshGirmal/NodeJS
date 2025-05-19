@@ -1,0 +1,20 @@
+{
+  "name": "basic",
+  "version": "1.0.0",
+  "description": "Node JS Concepts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BharteshGirmal/NodeJS.git"
+  },
+  "author": "Bhartesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BharteshGirmal/NodeJS/issues"
+  },
+  "homepage": "https://github.com/BharteshGirmal/NodeJS#readme"
+}
