@@ -5,11 +5,13 @@ const { off } = require("process");
 
 exports.createStudent = async (req, res) => {
   try {
-    const { firstName, lastName, email, gender, dob } = req.body;
+    console.log(req.body);
+
+    const { FIRSTNAME, LASTNAME, EMAIL, GENDER, DOB } = req.body;
 
     const [result] = await DbConnection.query(
       "INSERT INTO STUDENT (FIRSTNAME, LASTNAME, EMAIL, GENDER, DOB) VALUES (?, ?, ?, ?, ?)",
-      [firstName, lastName, email, gender, dob]
+      [FIRSTNAME, LASTNAME, EMAIL, GENDER, DOB]
     );
 
     const [rows] = await DbConnection.query(
