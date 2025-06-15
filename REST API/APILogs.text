@@ -1,0 +1,11 @@
+
+
+URL: /api/user/1003
+HostName:localhost
+Payload : {"id":1003,"first_name":"Girmal","last_name":"Bhartesh","gender":"Male","email":"girmalbhartesh9178@gmail.com","job_title":"Developer"}
+TimeStamp : Sat Jun 14 2025 15:30:17 GMT+0530 (India Standard Time)
+
+URL: /api/user/1003
+HostName:localhost
+Payload : {"id":1003,"first_name":"Girmal","last_name":"Bhartesh","gender":"Male","email":"girmalbhartesh9178@gmail.com","job_title":"Developer"}
+TimeStamp : Sat Jun 14 2025 15:30:19 GMT+0530 (India Standard Time)

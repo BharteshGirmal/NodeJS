@@ -72,11 +72,11 @@ exports.getStudentById = async (req, res) => {
 
 exports.editStudentDetails = async (req, res) => {
   try {
-    const [firstName, lastName, email, gender, dob] = req.body;
-    const id = parseInt(req.query.id);
+    const { FIRSTNAME, LASTNAME, EMAIL, GENDER, DOB, STUDENT_ID } = req.body;
+    const id = parseInt(req.params.id);
     const [result] = await DbConnection.query(
       "UPDATE STUDENT SET FIRSTNAME = ?, LASTNAME = ?, EMAIL = ?, GENDER = ?, DOB = ? WHERE STUDENT_ID = ?",
-      [firstName, lastName, email, gender, dob, id]
+      [FIRSTNAME, LASTNAME, EMAIL, GENDER, DOB, id]
     );
 
     if (result.affectedRows === 0) {

@@ -27,8 +27,30 @@ const customServer = http.createServer((req, res) => {
   });
 });
 
-console.log("Http Server Example !!!");
+// console.log("Http Server Example !!!");
+// customServer.listen(8000, () => {
+//   console.log("Port is now listening at Port 8000");
+// });
 
-customServer.listen(8000, () => {
+// now using express JS
+
+const express = require("express");
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.status(201).json({ message: "Server has been started" });
+});
+
+app.get("/about", (req, res) => {
+  res
+    .status(201)
+    .json({ message: "Server has been started redirected to about page" });
+});
+app.post("/", () => {});
+app.put("/", () => {});
+app.delete("/", () => {});
+
+app.listen(8000, () => {
   console.log("Port is now listening at Port 8000");
 });
