@@ -1,0 +1,16 @@
+
+
+URL: /users/getallusers
+HostName: localhost
+Payload: {"first_name":"Bhartesh","last_name":"Girmal","gender":"Male","email":"girmalbhrtesh8@gmail.com","job_title":"Developer"}
+TimeStamp: Mon Jun 16 2025 23:30:36 GMT+0530 (India Standard Time)
+
+URL: /users/getallusers
+HostName: localhost
+Payload: {"first_name":"Bhartesh","last_name":"Girmal","gender":"Male","email":"girmalbhrtesh8@gmail.com","job_title":"Developer"}
+TimeStamp: Mon Jun 16 2025 23:39:54 GMT+0530 (India Standard Time)
+
+URL: /users/685055dbfd7fef59d6a85d0c
+HostName: localhost
+Payload: {"first_name":"Bhartesh","last_name":"Girmal","gender":"Male","email":"girmalbhrtesh8@gmail.com","job_title":"Developer"}
+TimeStamp: Mon Jun 16 2025 23:40:27 GMT+0530 (India Standard Time)
