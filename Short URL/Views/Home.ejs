@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <table border="1" cellpadding="8" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Short URL</th>
+          <th>Redirect URL</th>
+          <th>Visited History</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% urls.forEach(url => { %>
+        <tr>
+          <td>
+            <a href="/<%= url.shortenID %>" target="_blank"
+              ><%= url.shortenID %></a
+            >
+          </td>
+          <td><%= url.URL %></td>
+          <td>
+            <% if (url.visitedHistory && url.visitedHistory.length > 0) { %>
+            <ul>
+              <% url.visitedHistory.forEach(hit => { %>
+              <li><%= new Date(hit.timestamp).toLocaleString() %></li>
+              <% }); %>
+            </ul>
+            <% } else { %> No Visits <% } %>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>
