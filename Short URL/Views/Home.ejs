@@ -6,34 +6,68 @@
     <title>Home Page</title>
   </head>
   <body>
+    <h3>URL Shortener</h3>
+
+    <!-- Success Message -->
+    <% if (typeof success !== 'undefined' && success) { %>
+    <p style="color: green"><%= success %></p>
+    <% } %>
+
+    <!-- Error Message -->
+    <% if (typeof error !== 'undefined' && error) { %>
+    <p style="color: red"><%= error %></p>
+    <% } %>
+
+    <!-- URL Shortener Form -->
+    <form action="/URL" method="POST" style="margin-bottom: 20px">
+      <label for="url">Enter your Original URL:</label>
+      <input type="text" id="url" name="url" required style="margin: 0 10px" />
+      <button type="submit">Generate URL</button>
+    </form>
+
+    <!-- URL Table -->
     <table border="1" cellpadding="8" cellspacing="0">
       <thead>
         <tr>
+          <th>#</th>
           <th>Short URL</th>
-          <th>Redirect URL</th>
+          <th>Original URL</th>
           <th>Visited History</th>
         </tr>
       </thead>
       <tbody>
-        <% urls.forEach(url => { %>
+        <% if (urls && urls.length > 0) { %> <% for (let i = 0; i < urls.length;
+        i++) { const url = urls[i]; %>
         <tr>
+          <td><%= i + 1 %></td>
           <td>
-            <a href="/<%= url.shortenID %>" target="_blank"
-              ><%= url.shortenID %></a
-            >
+            <% if (url && url.shortID) { %>
+            <a href="http://localhost:8001/<%= url.shortID %>" target="_blank">
+              http://localhost:8001/<%= url.shortID %>
+            </a>
+            <% } else { %> N/A <% } %>
           </td>
-          <td><%= url.URL %></td>
+          <td><%= url && url.URL ? url.URL : 'N/A' %></td>
           <td>
-            <% if (url.visitedHistory && url.visitedHistory.length > 0) { %>
+            <% if (Array.isArray(url.visitedHistory) &&
+            url.visitedHistory.length > 0) { %>
             <ul>
-              <% url.visitedHistory.forEach(hit => { %>
-              <li><%= new Date(hit.timestamp).toLocaleString() %></li>
-              <% }); %>
+              <% for (let j = 0; j < url.visitedHistory.length; j++) { const hit
+              = url.visitedHistory[j]; %>
+              <li>
+                <%= hit && hit.timestamp ? new
+                Date(hit.timestamp).toLocaleString() : 'Unknown Time' %>
+              </li>
+              <% } %>
             </ul>
             <% } else { %> No Visits <% } %>
           </td>
         </tr>
-        <% }); %>
+        <% } %> <% } else { %>
+        <tr>
+          <td colspan="4">No URLs found</td>
+        </tr>
+        <% } %>
       </tbody>
     </table>
   </body>

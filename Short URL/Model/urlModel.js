@@ -1,8 +1,9 @@
+const { default: mongoose } = require("mongoose");
 const mongo = require("mongoose");
 
 const urlSchemas = mongo.Schema(
   {
-    shortenID: {
+    shortID: {
       type: String,
       required: true,
       unique: true,
@@ -18,6 +19,10 @@ const urlSchemas = mongo.Schema(
         },
       },
     ],
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+    },
   },
   { timestamps: true }
 );

@@ -1,25 +1,51 @@
 const URL = require("../Model/urlModel");
 const shortid = require("shortid");
-const express = require("express");
 
 const getShortURL = async (req, res) => {
-  const body = req.body;
-  const SHORTID = shortid.generate();
-  console.log(`short id created is ${SHORTID}`);
+  try {
+    console.log("Inside GetshortURL ...");
 
-  if (!body.url) return res.status(500).json({ error: "URL is Reuired ..." });
-  const result = await URL.create({
-    shortenID: SHORTID,
-    URL: body.url,
-    visitedHistory: [],
-  });
+    const body = req.body;
 
-  res.status(200).json({ message: "Sucess", id: SHORTID });
+    if (!body.url) {
+      return res.render("Home", { urls: [], error: "URL is required..." });
+    }
+
+    let shortID;
+    let exists = true;
+
+    while (exists) {
+      shortID = shortid.generate();
+      exists = await URL.findOne({ shortID });
+    }
+
+    console.log(`Short ID created is ${shortID}`);
+
+    const result = await URL.create({
+      shortID: shortID,
+      URL: body.url,
+      visitedHistory: [],
+      createdBy: res.user?._id || null, // fallback in case user is missing
+    });
+
+    console.log(result);
+
+    // Assuming you want to show all URLs on Home page:
+    const urls = await URL.find({ });
+
+    res.render("Home", { urls, error: null });
+  } catch (err) {
+    console.error(err);
+    res.status(500).render("Home", {
+      urls: [],
+      error: "Something went wrong while creating short URL.",
+    });
+  }
 };
 
 const getURLAnalytics = async (req, res) => {
-  const shortId = req.params.shortId;
-  const Result = await URL.findOne({ shortId });
+  const shortID = req.params.shortId;
+  const Result = await URL.findOne({ shortID });
   return res.json({
     totalClicks: Result.visitedHistory.length,
     analytics: Result.visitedHistory,
@@ -28,11 +54,11 @@ const getURLAnalytics = async (req, res) => {
 
 const redirectURL = async (req, res) => {
   try {
-    const shortId = String(req.params.shortid);
-    console.log("Redirecting shortId:", shortId);
+    const shortID = String(req.params.shortid);
+    console.log("Redirecting shortId:", shortID);
 
     const result = await URL.findOneAndUpdate(
-      { shortenID: shortId }, // fix field name too
+      { shortID: shortID }, // fix field name too
       {
         $push: {
           visitedHistory: {

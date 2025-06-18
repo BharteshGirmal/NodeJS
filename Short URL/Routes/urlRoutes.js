@@ -8,7 +8,16 @@ const {
   redirectURL,
 } = require("../Controllers/urlControllers");
 
-router.get("/", getShortURL);
+router.post("/", getShortURL);
+
+router.get("/", async (req, res) => {
+  if (!req.user) return res.redirect("/login");
+  const allurls = await URL.find({});
+  return res.render("Home", {
+    urls: allurls,
+  });
+});
+
 router.get("/get", async (req, res) => {
   const urls = await URL.find({});
   res.render("Home", { urls: urls });
