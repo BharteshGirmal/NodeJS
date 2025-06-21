@@ -32,15 +32,15 @@ const SignInUser = async (req, res) => {
   const result = await User.findOne({ email, password });
 
   //1. For StateFull Authntication using session uuid
-  // const sessionID = uuidv4();
-  // setUser(sessionID, email);
-  // res.cookie("uid", sessionID);
+  const sessionID = uuidv4();
+  setUser(sessionID, email);
+  res.cookie("uid", sessionID);
 
   //1. For StateLess Authntication using JWT Token
 
-  const token = setJwtToken(user);
+  // const token = setJwtToken(user);
 
-  res.cookie("uid", token);
+  // res.cookie("uid", token);
   const resultUrls = await URL.find({});
 
   return res.render("Home", { urls: resultUrls });
