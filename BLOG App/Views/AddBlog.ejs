@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./Parcels/Head.ejs') %>
+    <title>HomePage</title>
+    <style>
+      .form-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+
+      .signup-form {
+        background: #fff;
+        padding: 25px 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .signup-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .signup-form label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+      }
+
+      .signup-form input[type="text"],
+      .signup-form input[type="file"],
+      .signup-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        resize: vertical;
+      }
+
+      .signup-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .signup-form input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./Parcels/Navbar.ejs') %>
+
+    <div class="form-container">
+      <form
+        class="signup-form"
+        action="/blogs/add-blog"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <h2>Create Blog</h2>
+
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Enter title"
+          required
+        />
+
+        <label for="body">Blog Content</label>
+        <textarea
+          id="body"
+          name="body"
+          rows="6"
+          placeholder="Enter body content"
+          required
+        ></textarea>
+
+        <label for="coverImgURL">Blog Cover Image</label>
+        <input type="file" id="coverImgURL" name="coverImgURL" required />
+
+        <input type="submit" value="Add Blog" />
+      </form>
+    </div>
+
+    <%- include('./Parcels/Scripts.ejs') %>
+  </body>
+</html>
