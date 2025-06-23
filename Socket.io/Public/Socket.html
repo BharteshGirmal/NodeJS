@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.io Node JS</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h3>Message a Friend</h3>
+      <div class="msg-container"></div>
+      <div class="form-container">
+        <form class="msg-form">
+          <input type="text" class="msg-input" />
+          <button type="submit" class="submit-btn">Send</button>
+        </form>
+      </div>
+      <!-- Added -->
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      const form = document.querySelector(".msg-form");
+      const formContainer = document.querySelector(".msg-container");
+      const messageInput = document.querySelector(".msg-input");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const message = messageInput.value;
+        socket.emit("chat message", message);
+        addMessage(message, true); // Show as sent
+        messageInput.value = "";
+      });
+
+      socket.on("chat message", (msg) => {
+        addMessage(msg); // Show as received
+      });
+
+      function addMessage(message, isOwn = false) {
+        const displayedMessage = document.createElement("p");
+        displayedMessage.innerText = message;
+        if (isOwn) displayedMessage.classList.add("sent");
+        formContainer.append(displayedMessage);
+        formContainer.scrollTop = formContainer.scrollHeight;
+      }
+    </script>
+  </body>
+</html>
